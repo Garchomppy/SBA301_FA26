@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Card, Button, Badge, Modal } from "react-bootstrap";
+import ConfirmModal from "./ConfirmModal";
 
 export default function Orchid({
   orchidName,
   image,
   category,
   description,
-  isSpecial,
+  isSpecial = false,
 }) {
   const [show, setShow] = useState(false);
 
@@ -62,34 +63,25 @@ export default function Orchid({
         </Card.Body>
       </Card>
 
-      <Modal show={show} onHide={handleClose} size="md" centered>
-        <Modal.Header closeButton>
-          <Modal.Title>{orchidName}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="text-center mb-3">
+      <ConfirmModal
+        show={show}
+        handleClose={handleClose}
+        title={orchidName}
+        body={
+          <div>
             <img
               src={image}
               alt={orchidName}
-              style={{
-                width: "100%",
-                maxHeight: "400px",
-                objectFit: "contain",
-              }}
+              style={{ width: "100%", marginBottom: "15px" }}
             />
+            <p>
+              <strong>Category:</strong> {category}
+            </p>
+            <p>{description}</p>
           </div>
-          <h4>
-            Category: <Badge bg="secondary">{category}</Badge>
-          </h4>
-          <hr />
-          <p style={{ textAlign: "justify" }}>{description}</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        }
+        // onConfirm={}
+      />
     </>
   );
 }
