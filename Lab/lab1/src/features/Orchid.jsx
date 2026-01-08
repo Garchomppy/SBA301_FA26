@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // 1. Import useState
+import { useState } from "react"; // 1. Import useState
 import { Card, Button, Badge, Modal } from "react-bootstrap"; // 2. Import Modal
 
 export default function Orchid({
